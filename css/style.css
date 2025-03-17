@@ -42,9 +42,37 @@ h1 {
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
+    margin:0;
 }
 
 .photographer_section article img {
     height: 200px;
     width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+.photographer-location {
+    font-weight: 400;
+    font-size: 0.813rem;
+    color: #901C1C;
+    line-height: 100%;
+    text-align: center;
+    margin: 3px 0;
+}
+.photographer-tagline {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 100%;
+    text-align: center;
+    margin-bottom: 3px 0;
+}
+.photographer-price {
+    font-weight: 400;
+    font-size: 9px;
+    line-height: 100%;
+    text-align: center;
+    margin-top: 6px;
+    color: #757575;
+
 }
