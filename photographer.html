@@ -2,37 +2,105 @@
 <html>
   <head>
     <link href="css/photographer.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <title>Fisheye - photographe</title>
   </head>
   <body>
     <header>
       <img src="assets/images/logo.png" class="logo" />
     </header>
     <main id="main">
-      <div class="photographer-header">
+      <div class="photographer-header"></div>
+      <div class="select-dropdown">
+        <label for="sort">Trier par</label>
+        <div class="custom-select">
+          <button class="dropbtn">
+            Popularité<i class="chevron fa fa-chevron-down"></i>
+          </button>
+
+          <ul class="hidden">
+            <li data-value="popularity">Popularité</li>
+            <li data-value="date">Date</li>
+            <li data-value="title">Titre</li>
+          </ul>
+        </div>
+      </div>
+      <div id="contact_modal">
+        <div class="modal">
+          <form>
+            <header>
+              <h2 class="modal-title"></h2>
+              <img class="close-modal" src="assets/icons/close.svg" />
+            </header>
+            <div class="formData">
+                <label for="first">Prénom</label><br>
+                <input
+                  class="text-control"
+                  type="text"
+                  id="first"
+                  name="first"
+                /><br>
+            </div>
+            <div
+                class="formData">
+                <label for="last">Nom</label><br>
+                <input
+                  class="text-control"
+                  type="text"
+                  id="last"
+                  name="last"
+                /><br>
+            </div>
+            <div
+                class="formData">
+                <label for="email">E-mail</label><br>
+                <input
+                  class="text-control"
+                  type="email"
+                  id="email"
+                  name="email"
+                /><br>
+            </div>
+            <div class="formData">
+                <label for="message">Votre message</label><br>
+                <textarea
+                  class="text-control"
+                  id="message"
+                  name="message"
+                ></textarea><br>
+            </div>
+            <input
+              class="btn-submit"
+              type="submit"
+              
+              value="Envoyer">
+          </input>>
+          </form>
+        </div>
+      </div>
+      <div class="media"></div>
+      <div class="total-price">
+        <div class="total-likes">
+          <span class="total-likes-count">213456</span>
+          <i class="fa fa-heart"></i>
+        </div>
+        <div class="tarif">
+          <span class="">300 e/jour</span>
+        </div>
       </div>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+    <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/templates/photographer.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>

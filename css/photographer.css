@@ -3,14 +3,22 @@ body {
   margin: 0;
 }
 
-
 #contact_modal {
   display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: white;
 }
+
 
 .logo {
   width: 200px;
   height: 50px;
+  margin: 43px 0 40px 100px;
 }
 
 .photographer-header {
@@ -23,31 +31,27 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
- 
 }
 .photographer-card img {
   height: 200px;
   width: 200px;
   object-fit: cover;
-  border-radius: 50%; 
-  margin: auto 50px auto 0; 
+  border-radius: 50%;
+  margin: auto 50px auto 0;
 }
 .photographer-tagline {
-font-weight: 400;
-font-size: 18px;
-line-height: 100%;
-margin: 18px 0 0 0;
-color: #525252;
-
-
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  margin: 18px 0 0 0;
+  color: #525252;
 }
 .photographer-location {
-font-weight: 400;
-font-size: 24px;
-line-height: 100%;
-margin: 18px 0 0 0;
-color: #901C1C;
-
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  margin: 18px 0 0 0;
+  color: #901c1c;
 }
 .photographer-name {
   display: flex;
@@ -59,8 +63,8 @@ h2 {
   font-weight: 400;
   font-size: 64px;
   line-height: 100%;
-  color: #D3573C;
-  margin:0;
+  color: #d3573c;
+  margin: 0;
 }
 
 .contact_button {
@@ -74,7 +78,7 @@ h2 {
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
-  margin:auto;
+  margin: auto;
 }
 
 .modal {
@@ -96,12 +100,14 @@ h2 {
 
 .modal header img {
   cursor: pointer;
+  padding-bottom: 70px;
 }
 
 .modal header h2 {
   font-size: 64px;
   font-weight: normal;
-  text-align: center;
+  color: #000000;
+
 }
 
 form {
@@ -131,9 +137,172 @@ form input {
   border-radius: 5px;
 }
 article {
-    display: flex;
+  display: flex;
 }
 
-h2, p {
-    display: inline; 
+h2,
+p {
+  display: inline;
 }
+
+/***************** Media *******************/
+.media {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 100px 0 100px;
+}
+.media-card {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 351px;
+  margin-bottom: 20px;
+}
+.media-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3px;
+}
+.media-card img {
+  width: 350px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+h3 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  color: #901c1c;
+  align-items: center;
+}
+.likes-container {
+  gap: 2px;
+  color: #901c1c;
+  font-size: 24px;
+}
+i {
+  margin-left: 4px;
+}
+
+/****** filter ******/
+
+.select-dropdown {
+  display: flex;
+  margin-left: 100px;
+  margin-top: 9px;
+}
+label {
+  font-weight: 700;
+  font-size: 18px;
+  margin: 11px 25px 35px 0;
+}
+.custom-select {
+  position: relative;
+  width: 195px;
+}
+
+.dropbtn {
+  width: 100%;
+  height: 58px;
+  background: #901c1c;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.custom-select ul {
+  width: 100%;
+  background: #901c1c;
+  color: white;
+  border: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+
+.custom-select ul.show {
+  display: block;
+}
+
+.custom-select li {
+  width: 85%;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  margin-left: 10%;
+  padding: 0;
+  cursor: pointer;
+  border-top: 3px solid white;
+  transition: background-color 0.3s;
+}
+
+.custom-select li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.chevron {
+  transition: transform 0.3s;
+}
+
+.chevron.rotate {
+  transform: rotate(180deg);
+}
+
+/* total */
+.total-price {
+  display: flex;
+  background: #db8876;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: right;
+  width: 20%;
+  height : 39px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 21px 31px;
+  margin-left: 72%;
+  position: fixed;
+  bottom: 10px; /* Ajustez selon vos besoins */
+  right: 10px; /* Ajustez selon vos besoins */
+  background-color: white; /* Optionnel, pour la visibilité */
+  padding: 10px; /* Optionnel, pour l'espacement */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optionnel, pour l'effet visuel */
+}
+/* Modal */
+.modal header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.formData {
+  width:100%;
+}
+.text-control {
+  width:100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
+}
+.btn-submit {
+  width: 170px;
+  height: 69px;
+  background: #901c1c;
+  border-radius: 5px;
+  border:none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  
+}
+
