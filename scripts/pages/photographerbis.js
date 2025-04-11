@@ -106,3 +106,63 @@ async function renderMedia() {
 // Call the render function
 renderMedia();
 
+// Fonction pour mettre à jour le compteur total de likes
+// Modifier la fonction setupLikesCounter
+function setupLikesCounter(mediaObjects) {
+    // Cette fonction sera appelée après que les médias sont affichés
+    setTimeout(() => {
+      const likeButtons = document.querySelectorAll(".likes-container");
+      
+      likeButtons.forEach((button) => {
+        // Récupérer l'article parent (la carte média)
+        const mediaCard = button.closest('.media-card');
+        // Récupérer le titre du média
+        const title = mediaCard.querySelector('h3').textContent;
+        // Trouver l'objet média correspondant
+        const mediaItem = mediaObjects.find(media => media.title === title);
+        
+        // Ajouter un attribut pour suivre si déjà liké (si pas encore défini)
+        if (mediaItem && typeof mediaItem.isLiked === 'undefined') {
+          mediaItem.isLiked = false;
+        }
+        
+        // Si déjà liké, ajouter la classe visuelle
+        if (mediaItem && mediaItem.isLiked) {
+          button.classList.add('liked');
+        }
+        
+        button.addEventListener("click", function() {
+          if (mediaItem && !mediaItem.isLiked) {
+            // Marquer comme liké
+            mediaItem.isLiked = true;
+            
+            // Incrémenter le compteur
+            mediaItem.likes += 1;
+            
+            // Mettre à jour l'affichage
+            const likesCount = button.querySelector(".likes-count");
+            likesCount.textContent = mediaItem.likes;
+            
+            // Ajouter la classe visuelle
+            button.classList.add('liked');
+            
+            // Mettre à jour le total des likes
+            updateTotalLikes(mediaObjects);
+          }
+        });
+      });
+    }, 100);
+  }
+  function updateTotalLikes(mediaObjects) {
+  
+    const totalLikesCount = document.querySelector(".total-likes-count");
+  
+    if (totalLikesCount) {
+  
+      const sum = mediaObjects.reduce((total, media) => total + media.likes, 0);
+  
+      totalLikesCount.textContent = sum;
+  
+    }
+  
+  }

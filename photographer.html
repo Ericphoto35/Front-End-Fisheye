@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/photographer.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
@@ -8,16 +8,16 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  
 
     <title>Fisheye - photographe</title>
   </head>
-  <body>
+  <body >
+    <main-wrapper class="main-wrapper" aria-hidden="false">
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt="logo"/>
     </header>
     <main id="main">
       <div class="photographer-header"></div>
@@ -35,12 +35,12 @@
           </ul>
         </div>
       </div>
-      <div id="contact_modal">
-        <div class="modal">
-          <form>
+      <div id="contact_modal" role="dialog" aria-labelledby="contact_modal" aria-hidden="true">
+        <div class="modal" role="group" aria-labelledby="coordonnées">
+          <form novalidate>
             <header>
               <h2 class="modal-title"></h2>
-              <img class="close-modal" src="assets/icons/close.svg" />
+              <img class="close-modal" src="assets/icons/close.svg" aria-label="close contact form" alt="fermer la modale" />
             </header>
             <div class="formData">
                 <label for="first">Prénom</label><br>
@@ -49,6 +49,7 @@
                   type="text"
                   id="first"
                   name="first"
+                  aria-label="Prénom"
                 /><br>
             </div>
             <div
@@ -59,6 +60,7 @@
                   type="text"
                   id="last"
                   name="last"
+                  aria-label="Nom"
                 /><br>
             </div>
             <div
@@ -69,6 +71,7 @@
                   type="email"
                   id="email"
                   name="email"
+                  aria-label="E-mail"
                 /><br>
             </div>
             <div class="formData">
@@ -77,21 +80,33 @@
                   class="text-control"
                   id="message"
                   name="message"
+                  aria-label="Votre message"
                 ></textarea><br>
             </div>
-            <input
+             <input
               class="btn-submit"
               type="submit"
-              
-              value="Envoyer">
-          </input>>
+              value="Envoyer"
+              aria-label="Envoyer le message">
+          </input>
           </form>
         </div>
       </div>
+      <div id="lightbox" aria-hidden="true" role="dialog" aria-labelledby="lightbox" aria-describedby="lightbox">
+        <i class="fa-solid fa-xmark close-lightbox" aria-label="close lightbox"></i>
+        <span class="prev-lightbox" aria-label="photo précédente">&#10094;</span>
+        <div class="lightbox-content">
+        <img class="lightbox-image" src="" alt="Lightbox Image" />
+        <video class="lightbox-video" src="" controls></video>
+        <div class="lightbox-title"></div>
+        </div>
+        <span class="next-lightbox" aria-label="photo suivante">&#10095;</span>
+      </div>
+
       <div class="media"></div>
       <div class="total-price">
         <div class="total-likes">
-          <span class="total-likes-count">213456</span>
+          <span class="total-likes-count"></span>
           <i class="fa fa-heart"></i>
         </div>
         <div class="tarif">
@@ -99,6 +114,7 @@
         </div>
       </div>
     </main>
+  </main-wrapper>
     <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/templates/photographer.js"></script>
     <script src="/scripts/pages/photographer.js"></script>

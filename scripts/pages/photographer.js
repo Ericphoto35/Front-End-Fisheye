@@ -1,7 +1,7 @@
-//// recuperer le photographe
+//// recuperer le photographe /////
 async function getPhotographer() {
   const url = new URL(window.location.href);
-  const id = parseInt(url.searchParams.get("id")); // Convertir en nombre entier
+  const id = parseInt(url.searchParams.get("id")); 
 
   try {
     const response = await fetch("data/photographers.json");
@@ -14,14 +14,14 @@ async function getPhotographer() {
     return photographer;
   } catch (error) {
     console.error("Erreur lors de la récupération du photographe :", error);
-    return null; // ou gérer l'erreur autrement
+    return null; 
   }
 }
 
-//// recuperer les medias
+//// recuperer les medias ///////
 async function getMedia() {
   const url = new URL(window.location.href);
-  const id = parseInt(url.searchParams.get("id")); // Convertir en nombre entier
+  const id = parseInt(url.searchParams.get("id")); 
 
   try {
     const response = await fetch("data/photographers.json");
@@ -34,158 +34,11 @@ async function getMedia() {
     return media;
   } catch (error) {
     console.error("Erreur lors de la récupération des médias :", error);
-    return []; // ou gérer l'erreur autrement
+    return [];
   }
 }
 
-////display media
-
-class ImageMedia {
-  constructor(data) {
-    this.id = data.id;
-    this.photographerId = data.photographerId;
-    this.title = data.title;
-    this.image = data.image;
-    this.likes = data.likes;
-  }
-
-  createMediaElement() {
-    const mediaCard = document.createElement("article");
-    mediaCard.classList.add("media-card");
-
-    const img = document.createElement("img");
-    img.src = `assets/images/${this.image}`;
-    img.alt = this.title;
-
-    const mediaInfo = document.createElement("div");
-    mediaInfo.classList.add("media-info");
-
-    const title = document.createElement("h3");
-    title.textContent = this.title;
-
-    const likesContainer = document.createElement("div");
-    likesContainer.classList.add("likes-container");
-
-    const likesCount = document.createElement("span");
-    likesCount.textContent = this.likes;
-    likesCount.classList.add("likes-count");
-
-    const likesIcon = document.createElement("i");
-    likesIcon.classList.add("fa", "fa-heart");
-
-    likesContainer.appendChild(likesCount);
-    likesContainer.appendChild(likesIcon);
-
-    mediaInfo.appendChild(title);
-    mediaInfo.appendChild(likesContainer);
-
-    mediaCard.appendChild(img);
-    mediaCard.appendChild(mediaInfo);
-
-    return mediaCard;
-  }
-}
-
-class VideoMedia {
-  constructor(data) {
-    this.id = data.id;
-    this.photographerId = data.photographerId;
-    this.title = data.title;
-    this.video = data.video;
-    this.likes = data.likes;
-  }
-
-  createMediaElement() {
-    const mediaCard = document.createElement("article");
-    mediaCard.classList.add("media-card");
-
-    const video = document.createElement("video");
-    video.src = `assets/images/${this.video}`;
-    video.controls = true;
-
-    const mediaInfo = document.createElement("div");
-    mediaInfo.classList.add("media-info");
-
-    const title = document.createElement("h3");
-    title.textContent = this.title;
-
-    const likesContainer = document.createElement("div");
-    likesContainer.classList.add("likes-container");
-
-    const likesCount = document.createElement("span");
-    likesCount.textContent = this.likes;
-    likesCount.classList.add("likes-count");
-
-    const likesIcon = document.createElement("i");
-    likesIcon.classList.add("fas", "fa-heart");
-
-    likesContainer.appendChild(likesCount);
-    likesContainer.appendChild(likesIcon);
-
-    mediaInfo.appendChild(title);
-    mediaInfo.appendChild(likesContainer);
-
-    mediaCard.appendChild(video);
-    mediaCard.appendChild(mediaInfo);
-
-    return mediaCard;
-  }
-}
-
-// dropdown
-document.addEventListener("DOMContentLoaded", function () {
-  const customSelect = document.querySelector(".custom-select");
-  const dropbtn = customSelect.querySelector(".dropbtn");
-  const dropdownList = customSelect.querySelector("ul");
-  const chevron = customSelect.querySelector(".chevron");
-  const listItems = customSelect.querySelectorAll("li");
-
-  dropbtn.addEventListener("click", function (e) {
-    dropdownList.classList.toggle("show");
-    chevron.classList.toggle("rotate");
-    e.stopPropagation();
-  });
-
-  listItems.forEach((item) => {
-    item.addEventListener("click", function () {
-      dropbtn.firstChild.textContent = this.textContent + " ";
-
-      customSelect.dataset.value = this.dataset.value;
-
-      dropdownList.classList.remove("show");
-      chevron.classList.remove("rotate");
-    });
-  });
-  document.addEventListener("click", function () {
-    dropdownList.classList.remove("show");
-    chevron.classList.remove("rotate");
-  });
-});
-
-function mediaFactory(data) {
-  if (data.image) {
-    return new ImageMedia(data);
-  } else if (data.video) {
-    return new VideoMedia(data);
-  } else {
-    console.error("Type de média inconnu:", data);
-    return null;
-  }
-}
-
-function sortMedia(mediaObjects, value) {
-  switch (value) {
-    case "popularity":
-      return mediaObjects.sort((a, b) => b.likes - a.likes); // Inversé pour trier du plus grand au plus petit
-    case "date":
-      return mediaObjects.sort((a, b) => new Date(b.date) - new Date(a.date));
-    case "title":
-      return mediaObjects.sort((a, b) => a.title.localeCompare(b.title)); // Utilisation de localeCompare pour le tri alphabétique
-    default:
-      return mediaObjects;
-  }
-}
-//display header
+//// display header /////
 
 async function displayData(photographer) {
   const photographersHeader = document.querySelector(".photographer-header");
@@ -197,7 +50,7 @@ async function displayData(photographer) {
 }
 
 function photographerTemplate(data) {
-  const { name, portrait, city, country, tagline, price, id } = data;
+  const { name, portrait, city, country, tagline } = data;
   const picture = `assets/photographers/${portrait}`;
 
   function getUserCardDOM() {
@@ -238,7 +91,97 @@ function photographerTemplate(data) {
   return { name, picture, getUserCardDOM };
 }
 
-// Fonction pour afficher les médias
+//// display media /////
+
+class Media {
+  constructor(data) {
+    this.id = data.id;
+    this.photographerId = data.photographerId;
+    this.title = data.title;
+    this.likes = data.likes;
+  }
+
+  createMediaElement() {
+    const mediaCard = document.createElement("article");
+    mediaCard.classList.add("media-card");
+
+    // Cette méthode sera implémentée par les classes enfants
+    const mediaElement = this.createSpecificMediaElement();
+    mediaCard.appendChild(mediaElement);
+
+    const mediaInfo = document.createElement("div");
+    mediaInfo.classList.add("media-info");
+
+    const title = document.createElement("h3");
+    title.textContent = this.title;
+
+    const likesContainer = document.createElement("div");
+    likesContainer.classList.add("likes-container");
+
+    const likesCount = document.createElement("span");
+    likesCount.textContent = this.likes;
+    likesCount.classList.add("likes-count");
+
+    const likesIcon = document.createElement("i");
+    likesIcon.classList.add("fas", "fa-heart");
+
+    likesContainer.appendChild(likesCount);
+    likesContainer.appendChild(likesIcon);
+
+    mediaInfo.appendChild(title);
+    mediaInfo.appendChild(likesContainer);
+
+    mediaCard.appendChild(mediaInfo);
+
+    return mediaCard;
+  }
+
+  createSpecificMediaElement() {
+    throw new Error("Cette méthode doit être implémentée par les classes enfants");
+  }
+}
+
+class ImageMedia extends Media {
+  constructor(data) {
+    super(data);
+    this.image = data.image;
+  }
+
+  createSpecificMediaElement() {
+    const img = document.createElement("img");
+    img.src = `assets/images/${this.image}`;
+    img.alt = this.title;
+    img.classList.add("media-image");
+    return img;
+  }
+}
+
+class VideoMedia extends Media {
+  constructor(data) {
+    super(data);
+    this.video = data.video;
+  }
+
+  createSpecificMediaElement() {
+    const video = document.createElement("video");
+    video.src = `assets/images/${this.video}`;
+    video.controls = true;
+    return video;
+  }
+}
+
+function mediaFactory(data) {
+  if (data.image) {
+    return new ImageMedia(data);
+  } else if (data.video) {
+    return new VideoMedia(data);
+  } else {
+    console.error("Type de média inconnu:", data);
+    return null;
+  }
+}
+
+//// Fonction pour afficher les médias ////
 
 async function displayMedia(mediaObjects) {
   const mediaContainer = document.querySelector(".media");
@@ -253,9 +196,172 @@ async function displayMedia(mediaObjects) {
   });
 }
 
+//// dropdown ////
+
+document.addEventListener("DOMContentLoaded", function () {
+  const customSelect = document.querySelector(".custom-select");
+  const dropbtn = customSelect.querySelector(".dropbtn");
+  const dropdownList = customSelect.querySelector("ul");
+  const chevron = customSelect.querySelector(".chevron");
+  const listItems = customSelect.querySelectorAll("li");
+  
+  // Accessibilité
+  dropbtn.setAttribute("aria-haspopup", "listbox");
+  dropbtn.setAttribute("aria-expanded", "false");
+  dropdownList.setAttribute("role", "listbox");
+  
+  listItems.forEach((item) => {
+    item.setAttribute("role", "option");
+  });
+
+  dropbtn.addEventListener("click", function (e) {
+    const isExpanded = dropdownList.classList.toggle("show");
+    chevron.classList.toggle("rotate");
+    // Màj accessibilité
+    dropbtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+    e.stopPropagation();
+  });
+
+  listItems.forEach((item) => {
+    item.addEventListener("click", function () { 
+      dropbtn.firstChild.textContent = this.textContent + " ";
+      
+      customSelect.dataset.value = this.dataset.value;
+      
+      dropdownList.classList.remove("show");
+      chevron.classList.remove("rotate");
+      dropbtn.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  document.addEventListener("click", function () {
+    if (dropdownList.classList.contains("show")) {
+      dropdownList.classList.remove("show");
+      chevron.classList.remove("rotate");
+      dropbtn.setAttribute("aria-expanded", "false");
+    }
+  });
+});
+
+
+////// Fonction pour trier les médias /////
+
+function sortMedia(mediaObjects, value) {
+  switch (value) {
+    case "popularity":
+      return mediaObjects.sort((a, b) => b.likes - a.likes); 
+    case "date":
+      return mediaObjects.sort((a, b) => new Date(b.date) - new Date(a.date));
+    case "title":
+      return mediaObjects.sort((a, b) => a.title.localeCompare(b.title)); 
+    default:
+      return mediaObjects;
+  }
+}
+
+//Lightbox 
+function initLightbox() {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.querySelector(".lightbox-image");
+  const lightboxVideo = document.querySelector(".lightbox-video");
+  const closeButton = document.querySelector(".close-lightbox");
+  const prevButton = document.querySelector(".prev-lightbox");
+  const nextButton = document.querySelector(".next-lightbox");
+  const lightboxTitle = document.querySelector(".lightbox-title");
+  const mainwrapper = document.querySelector(".main-wrapper");
+
+
+  let currentIndex = 0;
+  let mediaElements = [];
+
+  lightbox.setAttribute("aria-hidden", "false");
+  mainwrapper.setAttribute("aria-hidden", "true");
+
+  //
+  function updateMediaElements() {
+    mediaElements = document.querySelectorAll(".media-card img, .media-card video .media-info h3");
+    
+    // 
+    mediaElements.forEach((mediaElement) => {
+      mediaElement.removeEventListener("click", handleMediaClick);
+      mediaElement.addEventListener("click", handleMediaClick);
+    });
+    
+    console.log("Lightbox initialized with", mediaElements.length, "media elements");
+  }
+
+  function handleMediaClick(event) {
+    // Find the index of the clicked element
+    const clickedElement = event.currentTarget;
+    const allElements = Array.from(mediaElements);
+    currentIndex = allElements.indexOf(clickedElement);
+    openLightbox(clickedElement);
+  }
+
+  function openLightbox(mediaElement) {
+    
+    if (mediaElement.tagName.toLowerCase() === "img") {
+      lightboxImage.src = mediaElement.src;
+      lightboxTitle.textContent = mediaElement.nextElementSibling.querySelector("h3").textContent;
+      lightboxImage.style.display = "block";
+      lightboxVideo.style.display = "none";
+      lightboxVideo.pause(); // Pause any playing video
+    } else if (mediaElement.tagName.toLowerCase() === "video") {
+      lightboxVideo.src = mediaElement.src;
+      lightboxVideo.style.display = "block";
+      lightboxImage.style.display = "none";
+    }
+    
+    lightbox.style.display = "flex"; // Make lightbox visible
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = "none";
+    lightbox.setAttribute("aria-hidden", "true");
+    mainwrapper.setAttribute("aria-hidden", "false");
+    if (lightboxVideo.src) {
+      lightboxVideo.pause(); // Ensure video is paused when closing
+    }
+  }
+
+  function showPrevious() {
+    currentIndex = (currentIndex - 1 + mediaElements.length) % mediaElements.length;
+    openLightbox(mediaElements[currentIndex]);
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % mediaElements.length;
+    openLightbox(mediaElements[currentIndex]);
+  }
+
+  // Add keyboard navigation
+  document.addEventListener("keydown", function(event) {
+    if (lightbox.style.display === "flex") {
+      if (event.key === "Escape") {
+        closeLightbox();
+      } else if (event.key === "ArrowLeft") {
+        showPrevious();
+      } else if (event.key === "ArrowRight") {
+        showNext();
+      }
+    }
+  });
+
+  closeButton.addEventListener("click", closeLightbox);
+  prevButton.addEventListener("click", showPrevious);
+  nextButton.addEventListener("click", showNext);
+
+  // Return the update function so we can call it after displaying media
+  return updateMediaElements;
+}
+
+///// MODAL  ////
+
 // Fonction pour afficher la modal de contact
+
 async function displayModal() {
   const modal = document.getElementById("contact_modal");
+  const body = document.querySelector("body");
   const photographer = await getPhotographer();
   const modalTitle = modal.querySelector(".modal-title");
 
@@ -264,68 +370,28 @@ async function displayModal() {
   }
 
   modal.style.display = "block";
+  modal.setAttribute("aria-hidden", "false");
+  body.setAttribute("aria-hidden", "true");
 }
 
 // Fonction pour fermer la modal de contact
 
 function closeModal() {
   const modal = document.getElementById("contact_modal");
+  const body = document.querySelector("body");
   modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+  body.setAttribute("aria-hidden", "false");
 }
 
-// initialisation
-async function init() {
-  const photographer = await getPhotographer();
-  const media = await getMedia();
-  const mediaObjects = media.map(mediaFactory);
-
-  if (photographer) {
-    displayData(photographer);
-
-    // Ajoutez le tri par défaut
-    const defaultSortedMedia = sortMedia([...mediaObjects], "title");
-    displayMedia(defaultSortedMedia);
-
-    // Gestion du dropdown de tri
-    const customSelect = document.querySelector(".custom-select");
-    const listItems = customSelect.querySelectorAll("li");
-
-    listItems.forEach((item) => {
-      item.addEventListener("click", function () {
-        const sortValue = this.dataset.value;
-        const sortedMedia = sortMedia([...mediaObjects], sortValue);
-
-        displayMedia(sortedMedia);
-      });
-    });
-
-    const contactButton = document.querySelector(".contact_button");
-    if (contactButton) {
-      contactButton.addEventListener("click", displayModal);
-    }
-    const closeModalButton = document.querySelector(".close-modal");
-    if (closeModalButton) {
-      closeModalButton.addEventListener("click", closeModal);
-    }
-  } else {
-    console.error("Photographe non trouvé");
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  init();
-});
-
-// MODAL
+// Fonction pour valider le formulaire de contact 
 
 function validate() {
-  // Récupération des valeurs des champs
   const firstName = document.getElementById("first").value;
   const lastName = document.getElementById("last").value;
   const email = document.getElementById("email").value;
   const message = document.getElementById("message").value;
 
-  // Initialisation d'un statut de validation
   let isValid = true;
 
   // Validation du prénom (au moins 2 caractères)
@@ -370,14 +436,13 @@ function validate() {
 
 // Fonction pour ajouter des messages d'erreur sous chaque champ
 function createErrorMessage(id, message) {
-  // Vérifier si un message d'erreur existe déjà
+
   const existingError = document.getElementById(id + "-error");
   if (existingError) {
     existingError.textContent = message;
     return;
   }
 
-  // Créer un nouvel élément pour le message d'erreur
   const errorDiv = document.createElement("div");
   errorDiv.id = id + "-error";
   errorDiv.className = "error-message";
@@ -386,21 +451,171 @@ function createErrorMessage(id, message) {
   errorDiv.style.fontSize = "12px";
   errorDiv.style.marginTop = "5px";
 
-  // Ajouter le message après le champ
   const field = document.getElementById(id);
   field.parentNode.insertBefore(errorDiv, field.nextSibling);
 }
 
 // Fonction pour effacer le message d'erreur
-function clearErrorMessage(field) {
-  const errorElement = document.getElementById(`${field}-error`);
-  errorElement.textContent = "";
+function clearErrorMessage(id) {
+  const errorDiv = document.getElementById(id + "-error");
+  if (errorDiv) {
+    errorDiv.remove();
+  }
 }
+
 // Validation du formulaire lors de la soumission
 document.querySelector("form").addEventListener("submit", function (event) {
   event.preventDefault(); // Empêche la soumission du formulaire
   if (validate()) {
     alert("Votre message a été envoyé !");
-    closeModal(); // Ferme la modal après validation
+    closeModal();
+    // Récupérer les valeurs des champs
+    const firstName = document.getElementById("first").value;
+    const lastName = document.getElementById("last").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    // Afficher les données dans la console
+    console.log("Données du formulaire :", {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      message: message,
+    }); 
   }
 });
+
+/////  Modifie displayMedia function to initialize the lightbox après displaying media ////
+
+async function displayMedia(mediaObjects) {
+  const mediaContainer = document.querySelector(".media");
+  mediaContainer.innerHTML = "";
+
+  mediaObjects.forEach((media) => {
+    if (media) {
+      const mediaElement = media.createMediaElement();
+      mediaContainer.appendChild(mediaElement);
+    }
+  });
+
+  if (window.updateLightboxElements) {
+    window.updateLightboxElements();
+  }
+  
+  // Mettre à jour le compteur total de likes
+  setupLikesCounter(mediaObjects);
+}
+
+/////// Fonction pour gérer les likes ///////
+// function setup likes counter 
+
+function setupLikesCounter(mediaObjects) {
+  setTimeout(() => {
+    const likeButtons = document.querySelectorAll(".likes-container");
+    
+    likeButtons.forEach((button) => {
+      const mediaCard = button.closest('.media-card');
+      const title = mediaCard.querySelector('h3').textContent;
+      const mediaItem = mediaObjects.find(media => media.title === title);
+      
+   
+      button.addEventListener("click", function() {
+        if (mediaItem && !mediaItem.isLiked) {
+          // Marquer comme liké
+          mediaItem.isLiked = true;
+          
+          // Incrémenter le compteur
+          mediaItem.likes += 1;
+          
+          // Mettre à jour l'affichage
+          const likesCount = button.querySelector(".likes-count");
+          likesCount.textContent = mediaItem.likes;
+          
+          // Ajouter la classe visuelle
+          button.classList.add('liked');
+          
+          // Mettre à jour le total des likes
+          updateTotalLikes(mediaObjects);
+        }
+      });
+    });
+  }, 100);
+}
+
+// Fonction pour mettre à jour le compteur total de likes 
+function updateTotalLikes(mediaObjects) {
+
+  const totalLikesCount = document.querySelector(".total-likes-count");
+
+  if (totalLikesCount) {
+
+    const sum = mediaObjects.reduce((total, media) => total + media.likes, 0);
+
+    totalLikesCount.textContent = sum;
+
+  }
+}
+
+
+/////// function INIT  ///////
+
+async function init() {
+  // Initialize the lightbox 
+  window.updateLightboxElements = initLightbox();
+  
+  const photographer = await getPhotographer();
+  const media = await getMedia();
+  const mediaObjects = media.map(mediaFactory);
+
+  if (photographer) {
+    displayData(photographer);
+
+    // Afficher les médias avec le tri par défaut
+    const defaultSortedMedia = sortMedia([...mediaObjects], "title");
+    await displayMedia(defaultSortedMedia);
+    
+    // update lightbox elements after displaying media
+    if (window.updateLightboxElements) {
+      window.updateLightboxElements();
+    }
+
+    // Gestion du dropdown de tri
+    const customSelect = document.querySelector(".custom-select");
+    const listItems = customSelect.querySelectorAll("li");
+
+    listItems.forEach((item) => {
+      item.addEventListener("click", function () {
+        const sortValue = this.dataset.value;
+        const sortedMedia = sortMedia([...mediaObjects], sortValue);
+        displayMedia(sortedMedia);
+      });
+    });
+
+    const contactButton = document.querySelector(".contact_button");
+    if (contactButton) {
+      contactButton.addEventListener("click", displayModal);
+    }
+    const closeModalButton = document.querySelector(".close-modal");
+    if (closeModalButton) {
+      closeModalButton.addEventListener("click", closeModal);
+    }
+    
+    // Mettre à jour le compteur total de likes
+    updateTotalLikes(mediaObjects);
+    
+    // Ajouter la gestion des likes
+    setupLikesCounter(mediaObjects);
+  } else {
+    console.error("Photographe non trouvé");
+  }
+}
+
+
+//////  initialisation /////////
+
+document.addEventListener("DOMContentLoaded", () => {
+  init();
+});
+
+
+

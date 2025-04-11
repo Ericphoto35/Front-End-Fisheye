@@ -91,6 +91,7 @@ h2 {
   justify-content: space-between;
   padding: 35px;
   margin: auto;
+  margin-top: 6%;
 }
 
 .modal header {
@@ -120,14 +121,17 @@ form {
 form label {
   color: #312e2e;
   font-size: 36px;
+  font-weight: 400;
+  padding:0;
+  margin: 0;
+
 }
 
 form div {
   display: flex;
   flex-direction: column;
   width: 100%;
-  align-items: self-start;
-  margin-bottom: 26px;
+ 
 }
 
 form input {
@@ -180,9 +184,9 @@ h3 {
   align-items: center;
 }
 .likes-container {
-  gap: 2px;
   color: #901c1c;
   font-size: 24px;
+  font-weight: 500;
 }
 i {
   margin-left: 4px;
@@ -260,30 +264,29 @@ label {
 /* total */
 .total-price {
   display: flex;
-  background: #db8876;
+  background-color: #db8876;
   font-weight: 500;
   font-size: 24px;
-  line-height: 100%;
-  letter-spacing: 0%;
   text-align: right;
   width: 20%;
   height : 39px;
   align-items: center;
   justify-content: space-between;
-  padding: 21px 31px;
-  margin-left: 72%;
   position: fixed;
-  bottom: 10px; /* Ajustez selon vos besoins */
+  bottom:0; /* Ajustez selon vos besoins */
   right: 10px; /* Ajustez selon vos besoins */
-  background-color: white; /* Optionnel, pour la visibilité */
   padding: 10px; /* Optionnel, pour l'espacement */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optionnel, pour l'effet visuel */
+  border-top-left-radius: 5px; /* Arrondi du coin supérieur gauche */
+  border-top-right-radius: 5px; /* Arrondi du coin supérieur droit */
 }
 /* Modal */
 .modal header {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 20px;
+  
+  
 }
 .formData {
   width:100%;
@@ -303,6 +306,87 @@ label {
   color: white;
   font-size: 20px;
   font-weight: bold;
+}
+#message {
+  height:170px;
+}
+/* lightbox */
+#lightbox {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  flex-direction: column;
+}
+.lightbox-title {
+  font-weight: 400;
+  font-size: 24px;
+  color: #901C1C;
+  margin-top: 20px;
+  align-self: flex-start;
   
 }
 
+.lightbox-image,
+.lightbox-video {
+  
+  max-height: 90%;
+  display: none; /* Hidden by default */
+}
+
+.close-lightbox {
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  color: #901C1C;
+  cursor: pointer;
+  font-size: 42px;
+}
+
+
+.prev-lightbox,
+.next-lightbox {
+  position: absolute;
+  top: 50%; /* Centre verticalement */
+  transform: translateY(-50%); /* Ajuste le positionnement */
+  color: #901C1C;
+  cursor: pointer;
+  font-size: 48px;
+ 
+}
+
+.prev-lightbox {
+  left: 20px;
+  right: auto;
+}
+
+.next-lightbox {
+  right: 20px;
+}
+.lightbox-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+}
+
+
+/* liked */
+.likes-count {
+  margin-right: 3px; 
+}
+.likes-container.liked {
+  cursor: default;
+}
+
+.likes-container.liked .fa-heart {
+  color: #DB8876; /* Couleur du cœur quand liké - ajustez selon votre design */
+}
