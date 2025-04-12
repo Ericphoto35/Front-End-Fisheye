@@ -15,14 +15,14 @@
     <title>Fisheye - photographe</title>
   </head>
   <body >
-    <main-wrapper class="main-wrapper" aria-hidden="false">
+    <main class="main-wrapper" aria-hidden="false">
     <header>
       <img src="assets/images/logo.png" class="logo" alt="logo"/>
     </header>
-    <main id="main">
+    <div id="main">
       <div class="photographer-header"></div>
       <div class="select-dropdown">
-        <label for="sort">Trier par</label>
+        <label>Trier par</label>
         <div class="custom-select">
           <button class="dropbtn">
             Popularité<i class="chevron fa fa-chevron-down"></i>
@@ -88,7 +88,6 @@
               type="submit"
               value="Envoyer"
               aria-label="Envoyer le message">
-          </input>
           </form>
         </div>
       </div>
@@ -113,8 +112,8 @@
           <span class="">300 e/jour</span>
         </div>
       </div>
-    </main>
-  </main-wrapper>
+    </div>
+  </main>
     <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/templates/photographer.js"></script>
     <script src="/scripts/pages/photographer.js"></script>

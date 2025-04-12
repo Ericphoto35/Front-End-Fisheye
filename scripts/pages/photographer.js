@@ -181,21 +181,6 @@ function mediaFactory(data) {
   }
 }
 
-//// Fonction pour afficher les médias ////
-
-async function displayMedia(mediaObjects) {
-  const mediaContainer = document.querySelector(".media");
-
-  mediaContainer.innerHTML = "";
-
-  mediaObjects.forEach((media) => {
-    if (media) {
-      const mediaElement = media.createMediaElement();
-      mediaContainer.appendChild(mediaElement);
-    }
-  });
-}
-
 //// dropdown ////
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -549,9 +534,7 @@ function updateTotalLikes(mediaObjects) {
 
   if (totalLikesCount) {
 
-    const sum = mediaObjects.reduce((total, media) => total + media.likes, 0);
-
-    totalLikesCount.textContent = sum;
+    totalLikesCount.textContent = mediaObjects.reduce((total, media) => total + media.likes, 0);
 
   }
 }
