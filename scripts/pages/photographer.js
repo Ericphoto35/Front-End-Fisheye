@@ -290,14 +290,14 @@ function initLightbox() {
       lightboxTitle.textContent = mediaElement.nextElementSibling.querySelector("h3").textContent;
       lightboxImage.style.display = "block";
       lightboxVideo.style.display = "none";
-      lightboxVideo.pause(); // Pause any playing video
+      lightboxVideo.pause(); 
     } else if (mediaElement.tagName.toLowerCase() === "video") {
       lightboxVideo.src = mediaElement.src;
       lightboxVideo.style.display = "block";
       lightboxImage.style.display = "none";
     }
     
-    lightbox.style.display = "flex"; // Make lightbox visible
+    lightbox.style.display = "flex"; 
   }
 
   function closeLightbox() {
@@ -305,7 +305,7 @@ function initLightbox() {
     lightbox.setAttribute("aria-hidden", "true");
     mainwrapper.setAttribute("aria-hidden", "false");
     if (lightboxVideo.src) {
-      lightboxVideo.pause(); // Ensure video is paused when closing
+      lightboxVideo.pause(); 
     }
   }
 
@@ -319,7 +319,7 @@ function initLightbox() {
     openLightbox(mediaElements[currentIndex]);
   }
 
-  // Add keyboard navigation
+  
   document.addEventListener("keydown", function(event) {
     if (lightbox.style.display === "flex") {
       if (event.key === "Escape") {
@@ -336,7 +336,7 @@ function initLightbox() {
   prevButton.addEventListener("click", showPrevious);
   nextButton.addEventListener("click", showNext);
 
-  // Return the update function so we can call it after displaying media
+  
   return updateMediaElements;
 }
 
