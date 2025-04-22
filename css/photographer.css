@@ -1,6 +1,7 @@
 body {
   font-family: "DM Sans", sans-serif;
-  margin: 0;
+  margin: auto;
+  max-width: 1440px;
 }
 
 #contact_modal {
@@ -61,14 +62,14 @@ body {
 }
 h2 {
   font-weight: 400;
-  font-size: 64px;
+  font-size: 4em;
   line-height: 100%;
   color: #d3573c;
   margin: 0;
 }
 
 .contact_button {
-  font-size: 20px;
+  font-size: 1.25em;
   font-weight: bold;
   color: white;
   padding: 11px;
@@ -91,7 +92,11 @@ h2 {
   justify-content: space-between;
   padding: 35px;
   margin: auto;
-  margin-top: 6%;
+  margin-top: 2%;
+
+
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .modal header {
@@ -105,7 +110,7 @@ h2 {
 }
 
 .modal header h2 {
-  font-size: 64px;
+  font-size: 4em;
   font-weight: normal;
   color: #000000;
 
@@ -120,7 +125,7 @@ form {
 
 form label {
   color: #312e2e;
-  font-size: 36px;
+  font-size: 2.25em;
   font-weight: 400;
   padding:0;
   margin: 0;
@@ -156,6 +161,7 @@ p {
   justify-content: space-between;
   margin: 20px 100px 0 100px;
 }
+
 .media-card {
   display: flex;
   flex-direction: column;
@@ -163,11 +169,17 @@ p {
   height: 351px;
   margin-bottom: 20px;
 }
+
+.media::after {
+  content: "";
+  width: 350px;
+  height: 0;
+}
 .media-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 3px;
+  margin-top: 8px;
 }
 .media-card img {
   width: 350px;
@@ -178,14 +190,14 @@ p {
 h3 {
   margin: 0;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 1.313em;
   line-height: 100%;
   color: #901c1c;
   align-items: center;
 }
 .likes-container {
   color: #901c1c;
-  font-size: 24px;
+  font-size: 1.313em;
   font-weight: 500;
 }
 i {
@@ -231,6 +243,14 @@ label {
   padding: 0;
   margin: 0;
   display: none;
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  top: calc(100% - 12px);
+}
+
+.custom-select {
+  position: relative;
 }
 
 .custom-select ul.show {
@@ -266,18 +286,17 @@ label {
   display: flex;
   background-color: #db8876;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 1.5em;
   text-align: right;
-  width: 20%;
+  gap: 100px;
   height : 39px;
   align-items: center;
-  justify-content: space-between;
   position: fixed;
-  bottom:0; /* Ajustez selon vos besoins */
-  right: 10px; /* Ajustez selon vos besoins */
-  padding: 10px; /* Optionnel, pour l'espacement */
-  border-top-left-radius: 5px; /* Arrondi du coin supérieur gauche */
-  border-top-right-radius: 5px; /* Arrondi du coin supérieur droit */
+  bottom:0;
+  right: 30px;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 /* Modal */
 .modal header {
@@ -306,13 +325,14 @@ label {
   color: white;
   font-size: 20px;
   font-weight: bold;
+  margin-top:30px;
 }
 #message {
   height:170px;
 }
 /* lightbox */
 #lightbox {
-  display: none; /* Initially hidden */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -337,7 +357,7 @@ label {
 .lightbox-video {
   
   max-height: 90%;
-  display: none; /* Hidden by default */
+  display: none;
 }
 
 .close-lightbox {
@@ -353,8 +373,8 @@ label {
 .prev-lightbox,
 .next-lightbox {
   position: absolute;
-  top: 50%; /* Centre verticalement */
-  transform: translateY(-50%); /* Ajuste le positionnement */
+  top: 50%;
+  transform: translateY(-50%);
   color: #901C1C;
   cursor: pointer;
   font-size: 48px;
@@ -388,5 +408,5 @@ label {
 }
 
 .likes-container.liked .fa-heart {
-  color: #DB8876; /* Couleur du cœur quand liké - ajustez selon votre design */
+  color: #DB8876;
 }
