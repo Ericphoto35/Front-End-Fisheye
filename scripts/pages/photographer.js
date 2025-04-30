@@ -132,7 +132,7 @@ function initLightbox() {
 
   //
   function updateMediaElements() {
-    mediaElements = document.querySelectorAll(".media-card img, .media-card video .media-info h3");
+    mediaElements = document.querySelectorAll(".media-card img, .media-card video ");
     
     // 
     mediaElements.forEach((mediaElement) => {

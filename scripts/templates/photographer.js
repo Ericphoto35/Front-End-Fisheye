@@ -22,7 +22,7 @@ function photographerTemplate(data) {
         h2.textContent = name;
 
         // Configuration du lien
-        link.href = `photographer.html?id=${id}`; // Lien vers la page du photographe (exemple)
+        link.href = `photographer.html?id=${id}`;
         link.appendChild(img); // Placement de l'image dans le lien
 
         article.appendChild(link); // Ajout du lien à l'article
