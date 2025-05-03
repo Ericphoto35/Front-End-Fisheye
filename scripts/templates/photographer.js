@@ -1,13 +1,10 @@
-//// photographer template ////
-
-
 function photographerTemplate(data) {
-    const { name, portrait, city, country, tagline, price, id } = data; // Ajout de l'id
+    const { name, portrait, city, country, tagline, price, id } = data;
     const picture = `assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
         const article = document.createElement('article');
-        const link = document.createElement('a'); // Création du lien
+        const link = document.createElement('a');
         const img = document.createElement('img');
         const cityElement = document.createElement('p');
         const taglineElement = document.createElement('p');
@@ -21,11 +18,11 @@ function photographerTemplate(data) {
         priceElement.textContent = price + "€/jour";
         h2.textContent = name;
 
-        // Configuration du lien
-        link.href = `photographer.html?id=${id}`;
-        link.appendChild(img); // Placement de l'image dans le lien
 
-        article.appendChild(link); // Ajout du lien à l'article
+        link.href = `photographer.html?id=${id}`;
+        link.appendChild(img);
+
+        article.appendChild(link);
         article.appendChild(h2);
         article.appendChild(cityElement);
         article.appendChild(taglineElement);
@@ -40,8 +37,6 @@ function photographerTemplate(data) {
 
     return { name, picture, getUserCardDOM };
 }
-
-//// phtographer ID template ////
 
 function photographerTemplateId(data) {
     const { name, portrait, city, country, tagline } = data;
@@ -94,42 +89,53 @@ class Media {
       this.title = data.title;
       this.likes = data.likes;
     }
-  
+
     createMediaElement() {
-      const mediaCard = document.createElement("article");
-      mediaCard.classList.add("media-card");
-  
-      // Cette méthode sera implémentée par les classes enfants
-      const mediaElement = this.createSpecificMediaElement();
-      mediaCard.appendChild(mediaElement);
-  
-      const mediaInfo = document.createElement("div");
-      mediaInfo.classList.add("media-info");
-  
-      const title = document.createElement("h3");
-      title.textContent = this.title;
-  
-      const likesContainer = document.createElement("div");
-      likesContainer.classList.add("likes-container");
-  
-      const likesCount = document.createElement("span");
-      likesCount.textContent = this.likes;
-      likesCount.classList.add("likes-count");
-  
-      const likesIcon = document.createElement("i");
-      likesIcon.classList.add("fas", "fa-heart");
-  
-      likesContainer.appendChild(likesCount);
-      likesContainer.appendChild(likesIcon);
-  
-      mediaInfo.appendChild(title);
-      mediaInfo.appendChild(likesContainer);
-  
-      mediaCard.appendChild(mediaInfo);
-  
-      return mediaCard;
+        const mediaCard = document.createElement("article");
+        mediaCard.classList.add("media-card");
+
+        const mediaElement = this.createSpecificMediaElement();
+        // Rendre l'élément média focusable et ajouter les attributs d'accessibilité
+        mediaElement.setAttribute("tabindex", "0");
+        mediaElement.setAttribute("role", "img");
+        mediaElement.setAttribute("aria-label", `${this.title}, cliquez pour ouvrir la lightbox`);
+
+        // Si c'est une vidéo, ajoutez des contrôles
+        if (mediaElement.tagName.toLowerCase() === 'video') {
+            mediaElement.setAttribute("controls", "true");
+        }
+
+        mediaCard.appendChild(mediaElement);
+
+        const mediaInfo = document.createElement("div");
+        mediaInfo.classList.add("media-info");
+
+        const title = document.createElement("h3");
+        title.textContent = this.title;
+
+        const likeButton = document.createElement("button");
+        likeButton.classList.add("like-button");
+        likeButton.setAttribute("aria-label", "Aimer cette photo");
+        likeButton.setAttribute("tabindex", "0");
+
+        const likesCount = document.createElement("span");
+        likesCount.textContent = this.likes;
+        likesCount.classList.add("likes-count");
+
+        const likesIcon = document.createElement("i");
+        likesIcon.classList.add("fas", "fa-heart");
+        likesIcon.setAttribute("aria-hidden", "true");
+
+        likeButton.appendChild(likesCount);
+        likeButton.appendChild(likesIcon);
+
+        mediaInfo.appendChild(title);
+        mediaInfo.appendChild(likeButton);
+
+        mediaCard.appendChild(mediaInfo);
+
+        return mediaCard;
     }
-  
     createSpecificMediaElement() {
       throw new Error("Cette méthode doit être implémentée par les classes enfants");
     }
@@ -146,7 +152,11 @@ class Media {
       img.src = `assets/images/${this.image}`;
       img.alt = this.title;
       img.classList.add("media-image");
-      return img;
+      img.setAttribute("tabindex", "0");
+      img.setAttribute("role", "button");
+      img.setAttribute("aria-label", `${this.title}, cliquez pour ouvrir la lightbox`);
+
+        return img;
     }
   }
   
@@ -160,7 +170,12 @@ class Media {
       const video = document.createElement("video");
       video.src = `assets/images/${this.video}`;
       video.controls = false;
-      return video;
+      video.setAttribute("tabindex", "0");
+      video.setAttribute("role", "button");
+      video.setAttribute("aria-label", `${this.title}, cliquez pour ouvrir la lightbox`);
+
+
+        return video;
     }
   }
   

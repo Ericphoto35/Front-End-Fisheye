@@ -21,21 +21,44 @@
       <img src="assets/images/logo.png" class="logo" alt="logo"/>
       </a>
     </header>
-    <div id="main">
-      <div class="photographer-header"></div>
+    <div>
+      <nav class="photographer-header"></nav>
+
       <div class="select-dropdown">
-        <label>Trier par</label>
+        <label id="sort-label" for="sort-button">Trier par</label>
         <div class="custom-select">
-          <button class="dropbtn">
+          <button
+                  id="sort-button"
+                  class="dropbtn"
+                  aria-haspopup="listbox"
+                  aria-labelledby="sort-label"
+                  aria-expanded="false">
             Popularité<i class="chevron fa fa-chevron-down"></i>
           </button>
 
-          <ul class="hidden">
-            <li data-value="popularity">Popularité</li>
-            <li data-value="date">Date</li>
-            <li data-value="title">Titre</li>
+          <ul
+                  class="hidden"
+                  role="listbox"
+                  aria-labelledby="sort-label"
+                  tabindex="-1">
+            <li
+                    role="option"
+                    data-value="popularity"
+                    aria-selected="true"
+                    tabindex="0">Popularité</li>
+            <li
+                    role="option"
+                    data-value="date"
+                    aria-selected="false"
+                    tabindex="0">Date</li>
+            <li
+                    role="option"
+                    data-value="title"
+                    aria-selected="false"
+                    tabindex="0">Titre</li>
           </ul>
         </div>
+      </div>
       </div>
       <div id="contact_modal" role="dialog" aria-labelledby="contact_modal" aria-hidden="true">
         <div class="modal" role="group" aria-labelledby="coordonnées">
@@ -121,3 +144,4 @@
     <script src="scripts/pages/photographer.js"></script>
   </body>
 </html>
+```

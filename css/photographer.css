@@ -195,10 +195,12 @@ h3 {
   color: #901c1c;
   align-items: center;
 }
-.likes-container {
+.like-button {
   color: #901c1c;
   font-size: 1.313em;
   font-weight: 500;
+  border:none;
+  background-color: transparent;
 }
 i {
   margin-left: 4px;
@@ -407,6 +409,6 @@ label {
   cursor: default;
 }
 
-.likes-container.liked .fa-heart {
+.like-button.liked .fa-heart {
   color: #DB8876;
 }
