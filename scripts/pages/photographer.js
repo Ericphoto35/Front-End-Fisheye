@@ -1,4 +1,4 @@
-//// recuperer le photographe /////
+
 async function getPhotographer() {
   const url = new URL(window.location.href);
   const id = parseInt(url.searchParams.get("id")); 
@@ -15,7 +15,7 @@ async function getPhotographer() {
   }
 }
 
-//// recuperer les medias ///////
+
 async function getMedia() {
   const url = new URL(window.location.href);
   const id = parseInt(url.searchParams.get("id")); 
@@ -32,7 +32,7 @@ async function getMedia() {
   }
 }
 
-//// display header /////
+
 
 async function displayData(photographer) {
   const photographersHeader = document.querySelector(".photographer-header");
@@ -43,7 +43,7 @@ async function displayData(photographer) {
   photographersHeader.appendChild(userCardDOM);
 }
 
-//// dropdown ////
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const customSelect = document.querySelector(".custom-select");
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const chevron = customSelect.querySelector(".chevron");
   const listItems = customSelect.querySelectorAll("li");
   
-  // Accessibilité
+
   dropbtn.setAttribute("aria-haspopup", "listbox");
   dropbtn.setAttribute("aria-expanded", "false");
   dropdownList.setAttribute("role", "listbox");
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-////// Fonction pour trier les médias /////
+
 
 function sortMedia(mediaObjects, value) {
   switch (value) {
